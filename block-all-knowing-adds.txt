@@ -1,6 +1,6 @@
 ! ======================================================================
 ! UNIVERSAL INLINE / FEED / PROMO / BANNER BLOCKER
-! Version: 2026-02 Updated
+! Version: 2026-02 Enhanced
 ! Tool: uBlock Origin
 ! ======================================================================
 
@@ -39,6 +39,8 @@
 ##.revcontent
 ##.rc-widget
 ##.widget-ad
+##.native-ad
+##.recommended-widget
 
 ! ------------------------------
 ! INLINE / BETWEEN-POST ADS
@@ -57,6 +59,8 @@
 ##li:has(iframe)
 ##li:has(img[src*="ads"])
 ##li:has(a[href*="ads"])
+##section:has-text(Sponsored)
+##section:has-text(Promoted)
 
 ! ------------------------------
 ! GAME / MOBILE MINI BANNERS
@@ -67,6 +71,8 @@
 ##div:has-text(Install Now)
 ##div:has-text(Play Now)
 ##div:has-text(Download)
+##button:has-text(Install)
+##button:has-text(Play)
 
 ! ------------------------------
 ! INTERNAL / FIRST-PARTY PROMOS
@@ -98,6 +104,8 @@
 ##div[class*="feed"]:has-text(Sponsored)
 ##div[class*="lazy"]:has(iframe[src*="ads"])
 ##div[class*="lazy"]:has(img[src*="ads"])
+##div[class*="lazyload"]:has(iframe)
+##div[class*="lazyload"]:has(img)
 
 ! ------------------------------
 ! EMPTY PLACEHOLDERS & GAPS
@@ -105,11 +113,13 @@
 ##div:empty
 ##article:empty
 ##li:empty
+##section:empty
 ##div[style*="height: 250px"]
 ##div[style*="height:250px"]
 ##div[style*="height: 300px"]
 ##div[style*="min-height: 250px"]
 ##div[style*="min-height:250px"]
+##div[class*="placeholder"]
 
 ! ------------------------------
 ! STICKY / FLOATING ADS
@@ -121,6 +131,7 @@
 ##.fixed-ad
 ##.ad-fixed
 ##.ad-sticky
+##.fixed-banner
 
 ! ------------------------------
 ! ANTI-ADBLOCK / OVERLAYS
@@ -135,6 +146,10 @@
 ##.overlay-ad
 ##.popup-ad
 ##.lightbox-ad
+##.overlay
+##.modal
+##.popup
+##.notification-overlay
 
 ! ------------------------------
 ! SCRIPT / TRACKING BLOCKING
@@ -151,6 +166,9 @@
 ||outbrain.com^
 ||mgid.com^
 ||revcontent.com^
+||adservice.google.com^
+||tracking.*^
+||analytics.*^
 
 ! ------------------------------
 ! LAYOUT / CSS RESTORATION
@@ -160,7 +178,8 @@
 *##article,
 *##li,
 *##.post,
-*##.feed-item {
+*##.feed-item,
+*##section {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
