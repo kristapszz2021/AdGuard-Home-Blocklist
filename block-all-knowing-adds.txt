@@ -1,79 +1,66 @@
 ! ===============================
-! UNIVERSAL AD & BANNER REMOVAL
-! Removes banners, empty spaces, placeholders
-! Restores layout after ads are blocked
+! INLINE / BETWEEN-POST ADS
+! Game ads, feed ads, promoted posts
 ! ===============================
 
-! ----- Generic ad containers -----
-##.ad
-##.ads
-##.adsbox
-##.adbox
-##.ad-container
-##.ad-wrapper
-##.advert
-##.advertisement
-##.banner
-##.banner-ad
-##.promo
-##.sponsor
-##.sponsored
-##.commercial
+! ---- Generic feed injections ----
+##article:has-text(Ad)
+##article:has-text(Ads)
+##article:has-text(Sponsored)
+##article:has-text(Promoted)
+##article:has-text(Advertisement)
 
-! ----- Common ID-based ads -----
-##[id^="ad-"]
-##[id^="ads-"]
-##[id*="advert"]
-##[id*="sponsor"]
-##[id*="promo"]
+##div:has-text(Sponsored)
+##div:has-text(Promoted)
+##div:has-text(Ad Choices)
 
-! ----- Empty ad placeholders -----
-##div:has(> iframe[src*="ads"])
-##div:has(> iframe[id*="ad"])
-##div:has(> iframe[class*="ad"])
-##div:has(> img[src*="ads"])
-##div:has(> a[href*="ad"])
+! ---- Fake posts inside feeds ----
+##article:has(a[href*="ad"])
+##article:has(img[src*="ads"])
+##article:has(iframe)
 
-! ----- Fix empty gaps -----
-##div[style*="height: 250px"]
-##div[style*="height:250px"]
-##div[style*="height: 300px"]
-##div[style*="min-height: 250px"]
-##div[style*="min-height:250px"]
+##li:has(a[href*="ad"])
+##li:has(img[src*="ads"])
+##li:has(iframe)
 
-! ----- Sticky / floating ads -----
-##.sticky-ad
-##.floating-ad
-##.fixed-ad
-##.ad-fixed
-##.ad-sticky
+! ---- Game / mobile-style mini banners ----
+##div[class*="game"]:has-text(Ad)
+##div[class*="promo"]:has-text(Play)
+##div[class*="install"]
+##div:has-text(Install Now)
+##div:has-text(Play Now)
+##div:has-text(Download)
 
-! ----- Native ads (Taboola / Outbrain / MGID) -----
-##.OUTBRAIN
+! ---- Native ad networks embedded in feeds ----
 ##.taboola
+##.OUTBRAIN
 ##.trc_rbox
 ##.mgid
-##.mgbox
+##.revcontent
 
-! ----- “Sponsored content” blocks -----
-##article:has-text(Sponsored)
-##div:has-text(Sponsored)
-##span:has-text(Advertisement)
+! ---- Inline sponsored cards ----
+##[class*="sponsor"]
+##[class*="promoted"]
+##[class*="paid"]
+##[data-sponsored]
+##[data-ad]
+##[aria-label*="ad"]
 
-! ----- Anti-adblock messages -----
-##.adblock
-##.adblock-overlay
-##.adblock-modal
-##.anti-adblock
-##.paywall
-##.subscribe-overlay
+! ---- Remove empty feed gaps ----
+##article:empty
+##li:empty
+##div:empty
 
-! ----- Restore layout (important) -----
-*##body { overflow: auto !important; }
-*##html { overflow: auto !important; }
-*##div { max-height: none !important; }
+! ---- Fix feed spacing after removal ----
+*##article { margin-bottom: 0 !important; }
+*##li { margin-bottom: 0 !important; }
+*##.post { margin-bottom: 0 !important; }
+*##.feed-item { margin-bottom: 0 !important; }
 
-! ----- Remove leftover margins -----
-*##.content { margin-top: 0 !important; }
-*##.main { margin-top: 0 !important; }
-*##.container { padding-top: 0 !important; }
+! ---- Infinite scroll injections ----
+##div[class*="infinite"]:has-text(Sponsored)
+##div[class*="stream"]:has-text(Ad)
+
+! ---- Last resort (safe but strong) ----
+##article:has(span:has-text(Ad))
+##article:has(span:has-text(Sponsored))
