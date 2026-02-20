@@ -1,108 +1,79 @@
-!
-! Title: Unified 99% Ads, Banners & Trackers Blocklist
-! Description: Consolidated advertising, tracking, analytics, mobile ads & RTB infrastructure
-! Coverage: ~99% of real-world ad traffic by ecosystem dominance
-! Last modified: 2026-02-20
-!
+! ===============================
+! UNIVERSAL AD & BANNER REMOVAL
+! Removes banners, empty spaces, placeholders
+! Restores layout after ads are blocked
+! ===============================
 
-0.0.0.0 doubleclick.net
-0.0.0.0 ad.doubleclick.net
-0.0.0.0 securepubads.g.doubleclick.net
-0.0.0.0 googleadservices.com
-0.0.0.0 www.googleadservices.com
-0.0.0.0 googlesyndication.com
-0.0.0.0 pagead.googlesyndication.com
-0.0.0.0 tpc.googlesyndication.com
-0.0.0.0 ads.google.com
+! ----- Generic ad containers -----
+##.ad
+##.ads
+##.adsbox
+##.adbox
+##.ad-container
+##.ad-wrapper
+##.advert
+##.advertisement
+##.banner
+##.banner-ad
+##.promo
+##.sponsor
+##.sponsored
+##.commercial
 
-0.0.0.0 amazon-adsystem.com
-0.0.0.0 aax.amazon-adsystem.com
-0.0.0.0 c.amazon-adsystem.com
-0.0.0.0 fls-na.amazon.com
+! ----- Common ID-based ads -----
+##[id^="ad-"]
+##[id^="ads-"]
+##[id*="advert"]
+##[id*="sponsor"]
+##[id*="promo"]
 
-0.0.0.0 connect.facebook.net
-0.0.0.0 graph.facebook.com
-0.0.0.0 pixel.facebook.com
-0.0.0.0 analytics.facebook.com
+! ----- Empty ad placeholders -----
+##div:has(> iframe[src*="ads"])
+##div:has(> iframe[id*="ad"])
+##div:has(> iframe[class*="ad"])
+##div:has(> img[src*="ads"])
+##div:has(> a[href*="ad"])
 
-0.0.0.0 ads.msn.com
-0.0.0.0 ads.microsoft.com
-0.0.0.0 bat.bing.com
+! ----- Fix empty gaps -----
+##div[style*="height: 250px"]
+##div[style*="height:250px"]
+##div[style*="height: 300px"]
+##div[style*="min-height: 250px"]
+##div[style*="min-height:250px"]
 
-0.0.0.0 adnxs.com
-0.0.0.0 ib.adnxs.com
-0.0.0.0 secure.adnxs.com
-0.0.0.0 openx.net
-0.0.0.0 rubiconproject.com
-0.0.0.0 pubmatic.com
-0.0.0.0 ads.pubmatic.com
-0.0.0.0 criteo.com
-0.0.0.0 static.criteo.net
-0.0.0.0 indexexchange.com
-0.0.0.0 triplelift.com
-0.0.0.0 smartadserver.com
-0.0.0.0 bidr.io
-0.0.0.0 contextweb.com
+! ----- Sticky / floating ads -----
+##.sticky-ad
+##.floating-ad
+##.fixed-ad
+##.ad-fixed
+##.ad-sticky
 
-0.0.0.0 unityads.mobi
-0.0.0.0 config.unityads.com
-0.0.0.0 ads.mediation.unityads.com
-0.0.0.0 ironsource.com
-0.0.0.0 ads.ironsource.com
-0.0.0.0 api.ironsource.com
-0.0.0.0 applovin.com
-0.0.0.0 ads.applovin.com
-0.0.0.0 mopub.com
-0.0.0.0 ads.mopub.com
-0.0.0.0 chartboost.com
-0.0.0.0 ads.chartboost.com
-0.0.0.0 vungle.com
-0.0.0.0 ads.vungle.com
-0.0.0.0 adcolony.com
-0.0.0.0 ads.adcolony.com
-0.0.0.0 mintegral.com
-0.0.0.0 inmobi.com
-0.0.0.0 ads.inmobi.com
-0.0.0.0 fyber.com
-0.0.0.0 smaato.com
+! ----- Native ads (Taboola / Outbrain / MGID) -----
+##.OUTBRAIN
+##.taboola
+##.trc_rbox
+##.mgid
+##.mgbox
 
-0.0.0.0 taboola.com
-0.0.0.0 cdn.taboola.com
-0.0.0.0 trc.taboola.com
-0.0.0.0 outbrain.com
-0.0.0.0 widgets.outbrain.com
-0.0.0.0 log.outbrain.com
-0.0.0.0 mgid.com
-0.0.0.0 cdn.mgid.com
-0.0.0.0 revcontent.com
-0.0.0.0 media.net
+! ----- “Sponsored content” blocks -----
+##article:has-text(Sponsored)
+##div:has-text(Sponsored)
+##span:has-text(Advertisement)
 
-0.0.0.0 google-analytics.com
-0.0.0.0 ssl.google-analytics.com
-0.0.0.0 analytics.google.com
-0.0.0.0 app-measurement.com
-0.0.0.0 hotjar.com
-0.0.0.0 script.hotjar.com
-0.0.0.0 static.hotjar.com
-0.0.0.0 mixpanel.com
-0.0.0.0 api.mixpanel.com
-0.0.0.0 segment.com
-0.0.0.0 cdn.segment.com
-0.0.0.0 amplitude.com
+! ----- Anti-adblock messages -----
+##.adblock
+##.adblock-overlay
+##.adblock-modal
+##.anti-adblock
+##.paywall
+##.subscribe-overlay
 
-0.0.0.0 appsflyer.com
-0.0.0.0 sdk.appsflyer.com
-0.0.0.0 adjust.com
-0.0.0.0 app.adjust.com
-0.0.0.0 branch.io
-0.0.0.0 kochava.com
-0.0.0.0 singular.net
+! ----- Restore layout (important) -----
+*##body { overflow: auto !important; }
+*##html { overflow: auto !important; }
+*##div { max-height: none !important; }
 
-0.0.0.0 propellerads.com
-0.0.0.0 popads.net
-0.0.0.0 serve.popads.net
-0.0.0.0 adsterra.com
-0.0.0.0 serve.adsterra.com
-0.0.0.0 hilltopads.net
-0.0.0.0 clickadu.com
-0.0.0.0 zeropark.com
+! ----- Remove leftover margins -----
+*##.content { margin-top: 0 !important; }
+*##.main { margin-top: 0 !important; }
+*##.container { padding-top: 0 !important; }
