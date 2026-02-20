@@ -1,12 +1,12 @@
 ! ======================================================================
 ! UNIVERSAL INLINE / FEED / PROMO / BANNER BLOCKER
-! Version: 2026-02
-! Scope: banners, game ads, feed promos, inline ads, internal promotions
+! Version: 2026-02 Updated
+! Scope: banners, feed promos, inline ads, internal promotions
 ! Tool: uBlock Origin
 ! ======================================================================
 
 ! ------------------------------
-! GENERIC BANNER / ADS
+! GENERIC BANNERS / ADS
 ! ------------------------------
 ##.ad
 ##.ads
@@ -23,7 +23,6 @@
 ##.sponsor
 ##.sponsored
 ##.commercial
-
 ##[id^="ad-"]
 ##[id^="ads-"]
 ##[id*="advert"]
@@ -31,7 +30,7 @@
 ##[id*="promo"]
 
 ! ------------------------------
-! NATIVE NETWORKS (TABOOLA / OUTBRAIN / MGID)
+! NATIVE NETWORKS (TABOOLA / OUTBRAIN / MGID / REVCONTENT)
 ! ------------------------------
 ##.taboola
 ##.trc_rbox
@@ -90,13 +89,15 @@
 ##article:has-text(Trending)
 
 ! ------------------------------
-! DYNAMIC / LAZY LOADED ADS
+! DYNAMIC / LAZY-LOADED ADS
 ! ------------------------------
 ##iframe[src*="ads"]
 ##div:has(iframe[src*="ads"])
 ##div[class*="infinite"]:has-text(Sponsored)
 ##div[class*="stream"]:has-text(Ad)
 ##div[class*="feed"]:has-text(Sponsored)
+##div[class*="lazy"]:has(iframe[src*="ads"])
+##div[class*="lazy"]:has(img[src*="ads"])
 
 ! ------------------------------
 ! EMPTY PLACEHOLDERS & GAPS
@@ -131,6 +132,9 @@
 ##.paywall
 ##.subscribe-overlay
 ##.modal-backdrop
+##.overlay-ad
+##.popup-ad
+##.lightbox-ad
 
 ! ------------------------------
 ! LAYOUT / CSS RESTORATION
@@ -160,3 +164,19 @@
 ##article:has(a[href*="campaign"])
 ##article[data-type*="ad"]
 ##div[data-tracking*="ad"]
+
+! ------------------------------
+! SCRIPT / TRACKING BLOCKING
+! ------------------------------
+||doubleclick.net^
+||googlesyndication.com^
+||adservice.google.com^
+||pagead2.googlesyndication.com^
+||ads.twitter.com^
+||ads.facebook.com^
+||partner.googleadservices.com^
+||adroll.com^
+||taboola.com^
+||outbrain.com^
+||mgid.com^
+||revcontent.com^
