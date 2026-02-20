@@ -1,0 +1,79 @@
+! ===============================
+! UNIVERSAL AD & BANNER REMOVAL
+! Removes banners, empty spaces, placeholders
+! Restores layout after ads are blocked
+! ===============================
+
+! ----- Generic ad containers -----
+##.ad
+##.ads
+##.adsbox
+##.adbox
+##.ad-container
+##.ad-wrapper
+##.advert
+##.advertisement
+##.banner
+##.banner-ad
+##.promo
+##.sponsor
+##.sponsored
+##.commercial
+
+! ----- Common ID-based ads -----
+##[id^="ad-"]
+##[id^="ads-"]
+##[id*="advert"]
+##[id*="sponsor"]
+##[id*="promo"]
+
+! ----- Empty ad placeholders -----
+##div:has(> iframe[src*="ads"])
+##div:has(> iframe[id*="ad"])
+##div:has(> iframe[class*="ad"])
+##div:has(> img[src*="ads"])
+##div:has(> a[href*="ad"])
+
+! ----- Fix empty gaps -----
+##div[style*="height: 250px"]
+##div[style*="height:250px"]
+##div[style*="height: 300px"]
+##div[style*="min-height: 250px"]
+##div[style*="min-height:250px"]
+
+! ----- Sticky / floating ads -----
+##.sticky-ad
+##.floating-ad
+##.fixed-ad
+##.ad-fixed
+##.ad-sticky
+
+! ----- Native ads (Taboola / Outbrain / MGID) -----
+##.OUTBRAIN
+##.taboola
+##.trc_rbox
+##.mgid
+##.mgbox
+
+! ----- “Sponsored content” blocks -----
+##article:has-text(Sponsored)
+##div:has-text(Sponsored)
+##span:has-text(Advertisement)
+
+! ----- Anti-adblock messages -----
+##.adblock
+##.adblock-overlay
+##.adblock-modal
+##.anti-adblock
+##.paywall
+##.subscribe-overlay
+
+! ----- Restore layout (important) -----
+*##body { overflow: auto !important; }
+*##html { overflow: auto !important; }
+*##div { max-height: none !important; }
+
+! ----- Remove leftover margins -----
+*##.content { margin-top: 0 !important; }
+*##.main { margin-top: 0 !important; }
+*##.container { padding-top: 0 !important; }
