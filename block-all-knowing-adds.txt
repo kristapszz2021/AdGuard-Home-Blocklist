@@ -1,29 +1,67 @@
-! ===============================
-! INLINE / BETWEEN-POST ADS
-! Game ads, feed ads, promoted posts
-! ===============================
+! ======================================================================
+! UNIVERSAL INLINE / FEED / PROMO / BANNER BLOCKER
+! Version: 2026-02
+! Scope: banners, game ads, feed promos, inline ads, internal promotions
+! Tool: uBlock Origin
+! ======================================================================
 
-! ---- Generic feed injections ----
+! ------------------------------
+! GENERIC BANNER / ADS
+! ------------------------------
+##.ad
+##.ads
+##.adsbox
+##.adbox
+##.ad-container
+##.ad-wrapper
+##.advert
+##.advertisement
+##.banner
+##.banner-ad
+##.promo
+##.promotion
+##.sponsor
+##.sponsored
+##.commercial
+
+##[id^="ad-"]
+##[id^="ads-"]
+##[id*="advert"]
+##[id*="sponsor"]
+##[id*="promo"]
+
+! ------------------------------
+! NATIVE NETWORKS (TABOOLA / OUTBRAIN / MGID)
+! ------------------------------
+##.taboola
+##.trc_rbox
+##.OUTBRAIN
+##.mgid
+##.mgbox
+##.revcontent
+##.rc-widget
+
+! ------------------------------
+! INLINE / BETWEEN-POST ADS
+! ------------------------------
 ##article:has-text(Ad)
 ##article:has-text(Ads)
 ##article:has-text(Sponsored)
 ##article:has-text(Promoted)
 ##article:has-text(Advertisement)
-
 ##div:has-text(Sponsored)
 ##div:has-text(Promoted)
-##div:has-text(Ad Choices)
-
-! ---- Fake posts inside feeds ----
-##article:has(a[href*="ad"])
-##article:has(img[src*="ads"])
+##span:has-text(Ad Choices)
 ##article:has(iframe)
-
-##li:has(a[href*="ad"])
-##li:has(img[src*="ads"])
+##article:has(img[src*="ads"])
+##article:has(a[href*="ads"])
 ##li:has(iframe)
+##li:has(img[src*="ads"])
+##li:has(a[href*="ads"])
 
-! ---- Game / mobile-style mini banners ----
+! ------------------------------
+! GAME / MOBILE MINI BANNERS
+! ------------------------------
 ##div[class*="game"]:has-text(Ad)
 ##div[class*="promo"]:has-text(Play)
 ##div[class*="install"]
@@ -31,36 +69,94 @@
 ##div:has-text(Play Now)
 ##div:has-text(Download)
 
-! ---- Native ad networks embedded in feeds ----
-##.taboola
-##.OUTBRAIN
-##.trc_rbox
-##.mgid
-##.revcontent
+! ------------------------------
+! INTERNAL / FIRST-PARTY PROMOS
+! ------------------------------
+##article:has(a[href*="utm_"])
+##article:has(a[href*="ref="])
+##article:has(a[href*="promo"])
+##article:has(a[href*="campaign"])
+##article:has(a[href*="tracking"])
+##article[class*="promo"]
+##article[class*="highlight"]
+##article[class*="featured"]
+##article[class*="recommended"]
+##article[style*="background"]
+##article[style*="box-shadow"]
+##article[style*="border"]
+##article:has-text(Read More)
+##article:has-text(Try Now)
+##article:has-text(Recommended)
+##article:has-text(Trending)
 
-! ---- Inline sponsored cards ----
-##[class*="sponsor"]
-##[class*="promoted"]
-##[class*="paid"]
-##[data-sponsored]
-##[data-ad]
-##[aria-label*="ad"]
-
-! ---- Remove empty feed gaps ----
-##article:empty
-##li:empty
-##div:empty
-
-! ---- Fix feed spacing after removal ----
-*##article { margin-bottom: 0 !important; }
-*##li { margin-bottom: 0 !important; }
-*##.post { margin-bottom: 0 !important; }
-*##.feed-item { margin-bottom: 0 !important; }
-
-! ---- Infinite scroll injections ----
+! ------------------------------
+! DYNAMIC / LAZY LOADED ADS
+! ------------------------------
+##iframe[src*="ads"]
+##div:has(iframe[src*="ads"])
 ##div[class*="infinite"]:has-text(Sponsored)
 ##div[class*="stream"]:has-text(Ad)
+##div[class*="feed"]:has-text(Sponsored)
 
-! ---- Last resort (safe but strong) ----
-##article:has(span:has-text(Ad))
-##article:has(span:has-text(Sponsored))
+! ------------------------------
+! EMPTY PLACEHOLDERS & GAPS
+! ------------------------------
+##div:empty
+##article:empty
+##li:empty
+##div[style*="height: 250px"]
+##div[style*="height:250px"]
+##div[style*="height: 300px"]
+##div[style*="min-height: 250px"]
+##div[style*="min-height:250px"]
+
+! ------------------------------
+! STICKY / FLOATING ADS
+! ------------------------------
+##.sticky
+##.sticky-ad
+##.floating
+##.floating-ad
+##.fixed-ad
+##.ad-fixed
+##.ad-sticky
+
+! ------------------------------
+! ANTI-ADBLOCK / OVERLAYS
+! ------------------------------
+##.adblock
+##.adblock-overlay
+##.adblock-modal
+##.anti-adblock
+##.paywall
+##.subscribe-overlay
+##.modal-backdrop
+
+! ------------------------------
+! LAYOUT / CSS RESTORATION
+! ------------------------------
+*##html { overflow: auto !important; }
+*##body { overflow: auto !important; }
+*##article,
+*##li,
+*##.post,
+*##.feed-item {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+*##.container,
+*##.content,
+*##.main {
+  padding-top: 0 !important;
+}
+*##div { max-height: none !important; }
+
+! ------------------------------
+! ADVANCED SITE-GENERIC INTERNAL PROMO FILTERS
+! ------------------------------
+##article:not(:has(time))
+##article:not(:has([href^="/user"]))
+##article:has(a[href*="/promo"])
+##article:has(a[href*="campaign"])
+##article[data-type*="ad"]
+##div[data-tracking*="ad"]
