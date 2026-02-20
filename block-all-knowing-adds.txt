@@ -1,0 +1,108 @@
+!
+! Title: Unified 99% Ads, Banners & Trackers Blocklist
+! Description: Consolidated advertising, tracking, analytics, mobile ads & RTB infrastructure
+! Coverage: ~99% of real-world ad traffic by ecosystem dominance
+! Last modified: 2026-02-20
+!
+
+0.0.0.0 doubleclick.net
+0.0.0.0 ad.doubleclick.net
+0.0.0.0 securepubads.g.doubleclick.net
+0.0.0.0 googleadservices.com
+0.0.0.0 www.googleadservices.com
+0.0.0.0 googlesyndication.com
+0.0.0.0 pagead.googlesyndication.com
+0.0.0.0 tpc.googlesyndication.com
+0.0.0.0 ads.google.com
+
+0.0.0.0 amazon-adsystem.com
+0.0.0.0 aax.amazon-adsystem.com
+0.0.0.0 c.amazon-adsystem.com
+0.0.0.0 fls-na.amazon.com
+
+0.0.0.0 connect.facebook.net
+0.0.0.0 graph.facebook.com
+0.0.0.0 pixel.facebook.com
+0.0.0.0 analytics.facebook.com
+
+0.0.0.0 ads.msn.com
+0.0.0.0 ads.microsoft.com
+0.0.0.0 bat.bing.com
+
+0.0.0.0 adnxs.com
+0.0.0.0 ib.adnxs.com
+0.0.0.0 secure.adnxs.com
+0.0.0.0 openx.net
+0.0.0.0 rubiconproject.com
+0.0.0.0 pubmatic.com
+0.0.0.0 ads.pubmatic.com
+0.0.0.0 criteo.com
+0.0.0.0 static.criteo.net
+0.0.0.0 indexexchange.com
+0.0.0.0 triplelift.com
+0.0.0.0 smartadserver.com
+0.0.0.0 bidr.io
+0.0.0.0 contextweb.com
+
+0.0.0.0 unityads.mobi
+0.0.0.0 config.unityads.com
+0.0.0.0 ads.mediation.unityads.com
+0.0.0.0 ironsource.com
+0.0.0.0 ads.ironsource.com
+0.0.0.0 api.ironsource.com
+0.0.0.0 applovin.com
+0.0.0.0 ads.applovin.com
+0.0.0.0 mopub.com
+0.0.0.0 ads.mopub.com
+0.0.0.0 chartboost.com
+0.0.0.0 ads.chartboost.com
+0.0.0.0 vungle.com
+0.0.0.0 ads.vungle.com
+0.0.0.0 adcolony.com
+0.0.0.0 ads.adcolony.com
+0.0.0.0 mintegral.com
+0.0.0.0 inmobi.com
+0.0.0.0 ads.inmobi.com
+0.0.0.0 fyber.com
+0.0.0.0 smaato.com
+
+0.0.0.0 taboola.com
+0.0.0.0 cdn.taboola.com
+0.0.0.0 trc.taboola.com
+0.0.0.0 outbrain.com
+0.0.0.0 widgets.outbrain.com
+0.0.0.0 log.outbrain.com
+0.0.0.0 mgid.com
+0.0.0.0 cdn.mgid.com
+0.0.0.0 revcontent.com
+0.0.0.0 media.net
+
+0.0.0.0 google-analytics.com
+0.0.0.0 ssl.google-analytics.com
+0.0.0.0 analytics.google.com
+0.0.0.0 app-measurement.com
+0.0.0.0 hotjar.com
+0.0.0.0 script.hotjar.com
+0.0.0.0 static.hotjar.com
+0.0.0.0 mixpanel.com
+0.0.0.0 api.mixpanel.com
+0.0.0.0 segment.com
+0.0.0.0 cdn.segment.com
+0.0.0.0 amplitude.com
+
+0.0.0.0 appsflyer.com
+0.0.0.0 sdk.appsflyer.com
+0.0.0.0 adjust.com
+0.0.0.0 app.adjust.com
+0.0.0.0 branch.io
+0.0.0.0 kochava.com
+0.0.0.0 singular.net
+
+0.0.0.0 propellerads.com
+0.0.0.0 popads.net
+0.0.0.0 serve.popads.net
+0.0.0.0 adsterra.com
+0.0.0.0 serve.adsterra.com
+0.0.0.0 hilltopads.net
+0.0.0.0 clickadu.com
+0.0.0.0 zeropark.com
