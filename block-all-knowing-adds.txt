@@ -1,6 +1,6 @@
 ! ======================================================================
 ! UNIVERSAL INLINE / FEED / PROMO / BANNER BLOCKER
-! Version: 2026-02 Enhanced
+! Version: 2026-02 Ultimate Adaptive
 ! Tool: uBlock Origin
 ! ======================================================================
 
@@ -27,6 +27,8 @@
 ##[id*="advert"]
 ##[id*="sponsor"]
 ##[id*="promo"]
+##div[class*="ad-"]
+##div[class*="ads-"]
 
 ! ------------------------------
 ! NATIVE NETWORKS / PROMOTED CONTENT
@@ -41,6 +43,10 @@
 ##.widget-ad
 ##.native-ad
 ##.recommended-widget
+##.recommended-post
+##.content-recommendation
+##section:has-text(Sponsored)
+##section:has-text(Promoted)
 
 ! ------------------------------
 ! INLINE / BETWEEN-POST ADS
@@ -59,40 +65,10 @@
 ##li:has(iframe)
 ##li:has(img[src*="ads"])
 ##li:has(a[href*="ads"])
-##section:has-text(Sponsored)
-##section:has-text(Promoted)
-
-! ------------------------------
-! GAME / MOBILE MINI BANNERS
-! ------------------------------
-##div[class*="game"]:has-text(Ad)
 ##div[class*="promo"]:has-text(Play)
 ##div[class*="install"]
-##div:has-text(Install Now)
-##div:has-text(Play Now)
-##div:has-text(Download)
 ##button:has-text(Install)
 ##button:has-text(Play)
-
-! ------------------------------
-! INTERNAL / FIRST-PARTY PROMOS
-! ------------------------------
-##article:has(a[href*="utm_"])
-##article:has(a[href*="ref="])
-##article:has(a[href*="promo"])
-##article:has(a[href*="campaign"])
-##article:has(a[href*="tracking"])
-##article[class*="promo"]
-##article[class*="highlight"]
-##article[class*="featured"]
-##article[class*="recommended"]
-##article[style*="background"]
-##article[style*="box-shadow"]
-##article[style*="border"]
-##article:has-text(Read More)
-##article:has-text(Try Now)
-##article:has-text(Recommended)
-##article:has-text(Trending)
 
 ! ------------------------------
 ! DYNAMIC / LAZY LOADED ADS
@@ -106,9 +82,50 @@
 ##div[class*="lazy"]:has(img[src*="ads"])
 ##div[class*="lazyload"]:has(iframe)
 ##div[class*="lazyload"]:has(img)
+##div[class*="scroll"]:has-text(Promo)
+##section[class*="sponsored"]:has(iframe)
 
 ! ------------------------------
-! EMPTY PLACEHOLDERS & GAPS
+! STICKY / FLOATING / MODAL ADS
+! ------------------------------
+##.sticky
+##.sticky-ad
+##.floating
+##.floating-ad
+##.fixed-ad
+##.ad-fixed
+##.ad-sticky
+##.fixed-banner
+##.modal
+##.overlay
+##.popup
+##.lightbox
+##.notification-overlay
+##.subscribe-overlay
+
+! ------------------------------
+! INTERNAL / FIRST-PARTY PROMOS
+! ------------------------------
+##article:has(a[href*="utm_"])
+##article:has(a[href*="ref="])
+##article:has(a[href*="promo"])
+##article:has(a[href*="campaign"])
+##article:has(a[href*="tracking"])
+##article[class*="promo"]
+##article[class*="highlight"]
+##article[class*="featured"]
+##article[class*="recommended"]
+##article[class*="recommended-widget"]
+##article[style*="background"]
+##article[style*="box-shadow"]
+##article[style*="border"]
+##article:has-text(Read More)
+##article:has-text(Try Now)
+##article:has-text(Recommended)
+##article:has-text(Trending)
+
+! ------------------------------
+! EMPTY PLACEHOLDERS & LAYOUT GAPS
 ! ------------------------------
 ##div:empty
 ##article:empty
@@ -120,36 +137,22 @@
 ##div[style*="min-height: 250px"]
 ##div[style*="min-height:250px"]
 ##div[class*="placeholder"]
-
-! ------------------------------
-! STICKY / FLOATING ADS
-! ------------------------------
-##.sticky
-##.sticky-ad
-##.floating
-##.floating-ad
-##.fixed-ad
-##.ad-fixed
-##.ad-sticky
-##.fixed-banner
-
-! ------------------------------
-! ANTI-ADBLOCK / OVERLAYS
-! ------------------------------
-##.adblock
-##.adblock-overlay
-##.adblock-modal
-##.anti-adblock
-##.paywall
-##.subscribe-overlay
-##.modal-backdrop
-##.overlay-ad
-##.popup-ad
-##.lightbox-ad
-##.overlay
-##.modal
-##.popup
-##.notification-overlay
+*##html { overflow: auto !important; }
+*##body { overflow: auto !important; }
+*##article,
+*##li,
+*##.post,
+*##.feed-item,
+*##section {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+*##.container,
+*##.content,
+*##.main {
+  padding-top: 0 !important;
+}
+*##div { max-height: none !important; }
 
 ! ------------------------------
 ! SCRIPT / TRACKING BLOCKING
@@ -169,29 +172,11 @@
 ||adservice.google.com^
 ||tracking.*^
 ||analytics.*^
+||pixel.*^
+||ads.*^
 
 ! ------------------------------
-! LAYOUT / CSS RESTORATION
-! ------------------------------
-*##html { overflow: auto !important; }
-*##body { overflow: auto !important; }
-*##article,
-*##li,
-*##.post,
-*##.feed-item,
-*##section {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-*##.container,
-*##.content,
-*##.main {
-  padding-top: 0 !important;
-}
-*##div { max-height: none !important; }
-
-! ------------------------------
-! ADVANCED SITE-GENERIC INTERNAL PROMO FILTERS
+! ADVANCED SITE-GENERIC PROMO FILTERS
 ! ------------------------------
 ##article:not(:has(time))
 ##article:not(:has([href^="/user"]))
