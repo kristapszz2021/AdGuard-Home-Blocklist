@@ -1,204 +1,194 @@
 ! ======================================================================
-! ZERO-EXISTENCE INTERNET FILTER (ONE FILE)
-! Tool: uBlock Origin (Advanced User)
-! Version: 2026-02 Nuclear
-!
-! GOAL:
-! - Ads never load
-! - Banners never render
-! - Promos never execute
-! - Tracking never fires
-! - No flashes, no placeholders
-!
-! WARNING:
-! - Breakage expected
-! - Feeds & comments may vanish
-! - This is intentional
+! UNIVERSAL INLINE / FEED / PROMO / BANNER BLOCKER
+! Version: 2026-02 Ultimate Adaptive+
+! Tool: uBlock Origin
 ! ======================================================================
 
+! ------------------------------
+! GENERIC BANNER / ADS
+! ------------------------------
+##.ad
+##.ads
+##.adsbox
+##.adbox
+##.ad-container
+##.ad-wrapper
+##.advert
+##.advertisement
+##.banner
+##.banner-ad
+##.promo
+##.promotion
+##.sponsor
+##.sponsored
+##.commercial
+##.marketing
+##[id^="ad-"]
+##[id^="ads-"]
+##[id*="advert"]
+##[id*="sponsor"]
+##[id*="promo"]
+##div[class*="ad-"]
+##div[class*="ads-"]
 
-! ======================================================================
-! GLOBAL NETWORK-LEVEL PREVENTION (STOP DOWNLOAD)
-! ======================================================================
+! ------------------------------
+! NATIVE NETWORKS / PROMOTED CONTENT
+! ------------------------------
+##.taboola
+##.trc_rbox
+##.OUTBRAIN
+##.mgid
+##.mgbox
+##.revcontent
+##.rc-widget
+##.widget-ad
+##.native-ad
+##.recommended-widget
+##.recommended-post
+##.content-recommendation
+##section:has-text(Sponsored)
+##section:has-text(Promoted)
 
-* * 3p block
-* * 3p-script block
-* * 3p-frame block
-* * inline-script block
+! ------------------------------
+! INLINE / BETWEEN-POST ADS
+! ------------------------------
+##article:has-text(Ad)
+##article:has-text(Ads)
+##article:has-text(Sponsored)
+##article:has-text(Promoted)
+##article:has-text(Advertisement)
+##div:has-text(Sponsored)
+##div:has-text(Promoted)
+##span:has-text(Ad Choices)
+##article:has(iframe)
+##article:has(img[src*="ads"])
+##article:has(a[href*="ads"])
+##li:has(iframe)
+##li:has(img[src*="ads"])
+##li:has(a[href*="ads"])
+##div[class*="promo"]:has-text(Play)
+##div[class*="install"]
+##button:has-text(Install)
+##button:has-text(Play)
 
-||ads^
-||adservice^
-||advertising^
-||marketing^
-||promo^
-||banner^
-||tracking^
-||analytics^
-||telemetry^
+! ------------------------------
+! DYNAMIC / LAZY LOADED ADS
+! ------------------------------
+##iframe[src*="ads"]
+##div:has(iframe[src*="ads"])
+##div[class*="infinite"]:has-text(Sponsored)
+##div[class*="stream"]:has-text(Ad)
+##div[class*="feed"]:has-text(Sponsored)
+##div[class*="lazy"]:has(iframe[src*="ads"])
+##div[class*="lazy"]:has(img[src*="ads"])
+##div[class*="lazyload"]:has(iframe)
+##div[class*="lazyload"]:has(img)
+##div[class*="scroll"]:has-text(Promo)
+##section[class*="sponsored"]:has(iframe)
 
+! ------------------------------
+! STICKY / FLOATING / MODAL ADS
+! ------------------------------
+##.sticky
+##.sticky-ad
+##.floating
+##.floating-ad
+##.fixed-ad
+##.ad-fixed
+##.ad-sticky
+##.fixed-banner
+##.modal
+##.overlay
+##.popup
+##.lightbox
+##.notification-overlay
+##.subscribe-overlay
+
+! ------------------------------
+! INTERNAL / FIRST-PARTY PROMOS
+! ------------------------------
+##article:has(a[href*="utm_"])
+##article:has(a[href*="ref="])
+##article:has(a[href*="promo"])
+##article:has(a[href*="campaign"])
+##article:has(a[href*="tracking"])
+##article[class*="promo"]
+##article[class*="highlight"]
+##article[class*="featured"]
+##article[class*="recommended"]
+##article[class*="recommended-widget"]
+##article[style*="background"]
+##article[style*="box-shadow"]
+##article[style*="border"]
+##article:has-text(Read More)
+##article:has-text(Try Now)
+##article:has-text(Recommended)
+##article:has-text(Trending)
+
+! ------------------------------
+! EMPTY PLACEHOLDERS & LAYOUT GAPS
+! ------------------------------
+##div:empty
+##article:empty
+##li:empty
+##section:empty
+##div[style*="height: 250px"]
+##div[style*="height:250px"]
+##div[style*="height: 300px"]
+##div[style*="min-height: 250px"]
+##div[style*="min-height:250px"]
+##div[class*="placeholder"]
+*##html { overflow: auto !important; }
+*##body { overflow: auto !important; }
+*##article,
+*##li,
+*##.post,
+*##.feed-item,
+*##section { margin-top: 0 !important; margin-bottom: 0 !important; }
+*##.container,
+*##.content,
+*##.main { padding-top: 0 !important; }
+*##div { max-height: none !important; }
+
+! ------------------------------
+! SCRIPT / TRACKING BLOCKING
+! ------------------------------
 ||doubleclick.net^
 ||googlesyndication.com^
-||google-analytics.com^
-||googletagmanager.com^
 ||adservice.google.com^
-
-||amazon-adsystem.com^
+||pagead2.googlesyndication.com^
+||ads.twitter.com^
+||ads.facebook.com^
+||partner.googleadservices.com^
 ||adroll.com^
-||criteo.com^
-||quantserve.com^
-||scorecardresearch.com^
-||hotjar.com^
-
 ||taboola.com^
 ||outbrain.com^
 ||mgid.com^
 ||revcontent.com^
+||tracking.*^
+||analytics.*^
+||pixel.*^
+||ads.*^
 
-||facebook.com/tr^
-||connect.facebook.net^
-||ads.facebook.com^
+! ------------------------------
+! SOCIAL / ENGAGEMENT WIDGETS
+! ------------------------------
+||platform.twitter.com^
+||platform.instagram.com^
+||platform.facebook.com^
+||platform.tiktok.com^
+##iframe[src*="social"]
+##iframe[src*="share"]
 
-||ads.twitter.com^
-||analytics.twitter.com^
-
-||cdn.ads.*^
-||cdn.track.*^
-||cdn.analytics.*^
-
-||*.gif$third-party
-||*.jpg$third-party
-||*.png$third-party
-||*.webp$third-party
-||*.mp4$third-party
-||*.webm$third-party
-
-
-! ======================================================================
-! SCRIPT EXECUTION TERMINATION (NO LOGIC RUNS)
-! ======================================================================
-
-##+js(set, navigator.sendBeacon, undefined)
-##+js(set, window.fetch, undefined)
-##+js(set, XMLHttpRequest.prototype.send, noopFunc)
-
-##+js(abort-on-property-read, ads)
-##+js(abort-on-property-read, adblock)
-##+js(abort-on-property-read, sponsored)
-##+js(abort-on-property-read, tracking)
-##+js(abort-on-property-read, analytics)
-##+js(abort-on-property-read, marketing)
-
-
-! ======================================================================
-! PRE-RENDER COSMETIC EXTERMINATION (NO FLASH)
-! ======================================================================
-
-##[class*="ad"]
-##[id*="ad"]
-##[class*="ads"]
-##[id*="ads"]
-##[class*="advert"]
-##[class*="promo"]
-##[class*="promotion"]
-##[class*="banner"]
-##[class*="sponsor"]
-##[class*="commercial"]
-##[class*="marketing"]
-
-##iframe
-##aside
-##footer
-
-##*:has-text(Sponsored)
-##*:has-text(Promoted)
-##*:has-text(Advertisement)
-##*:has-text(Recommended)
-##*:has-text(Trending)
-##*:has-text(For You)
-##*:has-text(You may like)
-##*:has-text(From around the web)
-##*:has-text(People also read)
-
-##button:has-text(Install)
-##button:has-text(Download)
-##button:has-text(Open in app)
-##button:has-text(Play)
-
-##[href*="affiliate"]
-##[href*="ref="]
-##[href*="utm_"]
-##[href*="amzn.to"]
-##[href*="bit.ly"]
-##[href*="linktr.ee"]
-
-
-! ======================================================================
-! DARK PATTERNS / POPUPS / PAYWALLS
-! ======================================================================
-
-##.modal
-##.popup
-##.overlay
-##.lightbox
-##.nag
-##.subscribe
-##.newsletter
-##.cookie
-##.consent
-##.gdpr
-##.paywall
-
-##*:has-text(Subscribe)
-##*:has-text(Sign up)
-##*:has-text(Create account)
-##*:has-text(Continue reading)
-##*:has-text(Unlock this article)
-
-
-! ======================================================================
-! FEED & ENGAGEMENT EXTERMINATION
-! ======================================================================
-
-##[class*="feed"]
-##[class*="stream"]
-##[class*="infinite"]
-##[class*="lazy"]
-##button:has-text(Load more)
-##button:has-text(Show more)
-
-
-! ======================================================================
-! EMPTY SHELL & LAYOUT CLEANUP
-! ======================================================================
-
-##div:empty
-##section:empty
-##article:empty
-##li:empty
-
-*##* {
-  animation: none !important;
-  transition: none !important;
-}
-
-*##html, body {
-  overflow: auto !important;
-}
-
-
-! ======================================================================
-! AUTO-PROMO / FAKE CONTENT REMOVAL
-! ======================================================================
-
+! ------------------------------
+! ADVANCED SITE-GENERIC PROMO FILTERS
+! ------------------------------
 ##article:not(:has(time))
-##article:has(a[href*="promo"])
+##article:not(:has([href^="/user"]))
+##article:has(a[href*="/promo"])
 ##article:has(a[href*="campaign"])
-##article:has(a[href*="tracking"])
 ##article[data-type*="ad"]
-##article[class*="featured"]
-##article[class*="recommended"]
-
-
-! ======================================================================
-! END OF FILE — CLEAN INTERNET ACHIEVED
-! ======================================================================
+##div[data-tracking*="ad"]
+##div[class*="recommend"]
+##div[class*="trending"]
+##div[class*="suggested"]
