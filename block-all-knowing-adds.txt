@@ -1,58 +1,182 @@
-! ======================
-! Hosts‑style domain blocks
-! ======================
-127.0.0.1 adservice.google.com
-127.0.0.1 ads.google.com
-127.0.0.1 pagead2.googlesyndication.com
-127.0.0.1 partner.googleadservices.com
-127.0.0.1 doubleclick.net
-127.0.0.1 google-analytics.com
-127.0.0.1 ssl.google-analytics.com
-127.0.0.1 analytics.twitter.com
-127.0.0.1 ads.twitter.com
-127.0.0.1 ads.facebook.com
-127.0.0.1 connect.facebook.net
-127.0.0.1 pixel.facebook.com
-127.0.0.1 rubiconproject.com
-127.0.0.1 openx.net
-127.0.0.1 adroll.com
-127.0.0.1 quantserve.com
-127.0.0.1 scorecardresearch.com
-127.0.0.1 atdmt.com
-127.0.0.1 zetadns.net
-127.0.0.1 adform.net
-127.0.0.1 popads.net
-127.0.0.1 autoplayvideos.example.com
+! ======================================================================
+! UNIVERSAL INLINE / FEED / PROMO / BANNER BLOCKER
+! Version: 2026-02 Updated
+! Tool: uBlock Origin
+! ======================================================================
 
-! ======================
-! AdBlock URL + resource filters
-! ======================
-||googlesyndication.com^
-||googleadservices.com^
+! ------------------------------
+! GENERIC BANNER / ADS
+! ------------------------------
+##.ad
+##.ads
+##.adsbox
+##.adbox
+##.ad-container
+##.ad-wrapper
+##.advert
+##.advertisement
+##.banner
+##.banner-ad
+##.promo
+##.promotion
+##.sponsor
+##.sponsored
+##.commercial
+##[id^="ad-"]
+##[id^="ads-"]
+##[id*="advert"]
+##[id*="sponsor"]
+##[id*="promo"]
+
+! ------------------------------
+! NATIVE NETWORKS / PROMOTED CONTENT
+! ------------------------------
+##.taboola
+##.trc_rbox
+##.OUTBRAIN
+##.mgid
+##.mgbox
+##.revcontent
+##.rc-widget
+##.widget-ad
+
+! ------------------------------
+! INLINE / BETWEEN-POST ADS
+! ------------------------------
+##article:has-text(Ad)
+##article:has-text(Ads)
+##article:has-text(Sponsored)
+##article:has-text(Promoted)
+##article:has-text(Advertisement)
+##div:has-text(Sponsored)
+##div:has-text(Promoted)
+##span:has-text(Ad Choices)
+##article:has(iframe)
+##article:has(img[src*="ads"])
+##article:has(a[href*="ads"])
+##li:has(iframe)
+##li:has(img[src*="ads"])
+##li:has(a[href*="ads"])
+
+! ------------------------------
+! GAME / MOBILE MINI BANNERS
+! ------------------------------
+##div[class*="game"]:has-text(Ad)
+##div[class*="promo"]:has-text(Play)
+##div[class*="install"]
+##div:has-text(Install Now)
+##div:has-text(Play Now)
+##div:has-text(Download)
+
+! ------------------------------
+! INTERNAL / FIRST-PARTY PROMOS
+! ------------------------------
+##article:has(a[href*="utm_"])
+##article:has(a[href*="ref="])
+##article:has(a[href*="promo"])
+##article:has(a[href*="campaign"])
+##article:has(a[href*="tracking"])
+##article[class*="promo"]
+##article[class*="highlight"]
+##article[class*="featured"]
+##article[class*="recommended"]
+##article[style*="background"]
+##article[style*="box-shadow"]
+##article[style*="border"]
+##article:has-text(Read More)
+##article:has-text(Try Now)
+##article:has-text(Recommended)
+##article:has-text(Trending)
+
+! ------------------------------
+! DYNAMIC / LAZY LOADED ADS
+! ------------------------------
+##iframe[src*="ads"]
+##div:has(iframe[src*="ads"])
+##div[class*="infinite"]:has-text(Sponsored)
+##div[class*="stream"]:has-text(Ad)
+##div[class*="feed"]:has-text(Sponsored)
+##div[class*="lazy"]:has(iframe[src*="ads"])
+##div[class*="lazy"]:has(img[src*="ads"])
+
+! ------------------------------
+! EMPTY PLACEHOLDERS & GAPS
+! ------------------------------
+##div:empty
+##article:empty
+##li:empty
+##div[style*="height: 250px"]
+##div[style*="height:250px"]
+##div[style*="height: 300px"]
+##div[style*="min-height: 250px"]
+##div[style*="min-height:250px"]
+
+! ------------------------------
+! STICKY / FLOATING ADS
+! ------------------------------
+##.sticky
+##.sticky-ad
+##.floating
+##.floating-ad
+##.fixed-ad
+##.ad-fixed
+##.ad-sticky
+
+! ------------------------------
+! ANTI-ADBLOCK / OVERLAYS
+! ------------------------------
+##.adblock
+##.adblock-overlay
+##.adblock-modal
+##.anti-adblock
+##.paywall
+##.subscribe-overlay
+##.modal-backdrop
+##.overlay-ad
+##.popup-ad
+##.lightbox-ad
+
+! ------------------------------
+! SCRIPT / TRACKING BLOCKING
+! ------------------------------
 ||doubleclick.net^
-||google-analytics.com^
-||analytics.twitter.com^
+||googlesyndication.com^
+||adservice.google.com^
+||pagead2.googlesyndication.com^
+||ads.twitter.com^
+||ads.facebook.com^
+||partner.googleadservices.com^
+||adroll.com^
+||taboola.com^
+||outbrain.com^
+||mgid.com^
+||revcontent.com^
+||criteo.com^
+||openx.net^
+||rubiconproject.com^
+||scorecardresearch.com^
+||quantserve.com^
+
+! ------------------------------
+! POPULAR GLOBAL WEBSITES ADS / TRACKERS
+! ------------------------------
+||youtube.com/get_midroll_ads^
 ||facebook.com/tr^
 ||pixel.facebook.com^
 ||connect.facebook.net^
-||ads.yahoo.com^
-||rubiconproject.com^
-||openx.net^
-||adroll.com^
-||quantserve.com^
-||scorecardresearch.com^
-||atdmt.com^
-||zetadns.net^
-||adform.net^
-||popads.net^
-||popunder.example.com^$popup
-||autoplayvideos.example.com^$script
-||outbrain.com^
-||taboola.com^
+||instagram.com^
+||tiktok.com^
+||twitter.com/ads^
+||linkedin.com/px^
+||pinterest.com/r^
+||reddit.com/ads^
+||snapchat.com/ads^
+||news.yahoo.com/ads^
+||cnn.com/ads^
 
-! ======================
-! Local & Popular Latvian Portals (block trackers/ads)
-! ======================
+! ------------------------------
+! POPULAR LATVIAN PORTALS ADS / TRACKERS
+! ------------------------------
 ||delfi.lv^
 ||tvnet.lv^
 ||inbox.lv^
@@ -66,15 +190,31 @@
 ||sportacentrs.com^
 ||draugiem.lv^
 
-! ======================
-! Tracking pixels / social media used in Latvia
-! ======================
-||instagram.com^
-||tiktok.com^
-||linkedin.com/px^
+! ------------------------------
+! LAYOUT / CSS RESTORATION
+! ------------------------------
+*##html { overflow: auto !important; }
+*##body { overflow: auto !important; }
+*##article,
+*##li,
+*##.post,
+*##.feed-item {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+*##.container,
+*##.content,
+*##.main {
+  padding-top: 0 !important;
+}
+*##div { max-height: none !important; }
 
-! ======================
-! Optional Whitelists (enable safe browsing for specific sites 👍)
-! ======================
-@@||lsm.lv^$document
-@@||ss.lv^$document
+! ------------------------------
+! ADVANCED SITE-GENERIC INTERNAL PROMO FILTERS
+! ------------------------------
+##article:not(:has(time))
+##article:not(:has([href^="/user"]))
+##article:has(a[href*="/promo"])
+##article:has(a[href*="campaign"])
+##article[data-type*="ad"]
+##div[data-tracking*="ad"]
