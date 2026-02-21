@@ -1,140 +1,58 @@
 ! ======================================================================
-! TOTAL CONTENT EXTERMINATION LIST
-! Ads • Promos • Sponsored • Tracking • Bait • Dark Patterns
-! Version: 2026-02 EXTREME PURITY MODE
+! ZERO-EXISTENCE INTERNET FILTER (ONE FILE)
 ! Tool: uBlock Origin (Advanced User)
+! Version: 2026-02 Nuclear
+!
+! GOAL:
+! - Ads never load
+! - Banners never render
+! - Promos never execute
+! - Tracking never fires
+! - No flashes, no placeholders
+!
+! WARNING:
+! - Breakage expected
+! - Feeds & comments may vanish
+! - This is intentional
 ! ======================================================================
 
-! ----------------------------------------------------------------------
-! EVERYTHING THAT EVEN LOOKS LIKE AN AD
-! ----------------------------------------------------------------------
-##[class*="ad"]
-##[class*="ads"]
-##[class*="advert"]
-##[class*="promo"]
-##[class*="sponsor"]
-##[class*="commercial"]
-##[class*="marketing"]
-##[id*="ad"]
-##[id*="ads"]
-##[id*="promo"]
-##[id*="sponsor"]
-##[aria-label*="advert"]
-##[aria-label*="sponsor"]
 
-! ----------------------------------------------------------------------
-! SPONSORED / PROMOTED / NATIVE BS (TEXT-BASED DETECTION)
-! ----------------------------------------------------------------------
-##*:has-text(Sponsored)
-##*:has-text(Promoted)
-##*:has-text(Partnered)
-##*:has-text(Paid Post)
-##*:has-text(Advertisement)
-##*:has-text(Ad Choices)
-##*:has-text(Brand Partner)
-##*:has-text(Affiliate)
-##*:has-text(Contains paid promotion)
+! ======================================================================
+! GLOBAL NETWORK-LEVEL PREVENTION (STOP DOWNLOAD)
+! ======================================================================
 
-! ----------------------------------------------------------------------
-! INFLUENCER / SOCIAL PROMO ELEMENTS
-! ----------------------------------------------------------------------
-##[class*="influencer"]
-##[class*="creator-card"]
-##[class*="brand-deal"]
-##[href*="linktr.ee"]
-##[href*="bit.ly"]
-##[href*="amzn.to"]
-##[href*="affiliate"]
-##[href*="ref="]
-##[href*="utm_"]
+* * 3p block
+* * 3p-script block
+* * 3p-frame block
+* * inline-script block
 
-! ----------------------------------------------------------------------
-! RECOMMENDED / TRENDING / FEED MANIPULATION
-! ----------------------------------------------------------------------
-##*:has-text(Recommended)
-##*:has-text(Trending)
-##*:has-text(For You)
-##*:has-text(You may like)
-##*:has-text(From around the web)
-##*:has-text(Related posts)
-##*:has-text(People also read)
-##*:has-text(Suggested)
-##[class*="recommend"]
-##[class*="trending"]
-##[class*="suggested"]
-##[class*="for-you"]
+||ads^
+||adservice^
+||advertising^
+||marketing^
+||promo^
+||banner^
+||tracking^
+||analytics^
+||telemetry^
 
-! ----------------------------------------------------------------------
-! VIDEO / APP PUSHING
-! ----------------------------------------------------------------------
-##*:has-text(Install)
-##*:has-text(Get the app)
-##*:has-text(Download app)
-##*:has-text(Open in app)
-##button:has-text(Play)
-##button:has-text(Install)
-##button:has-text(Download)
-
-! ----------------------------------------------------------------------
-! POPUPS / MODALS / DARK PATTERNS
-! ----------------------------------------------------------------------
-##.modal
-##.popup
-##.overlay
-##.backdrop
-##.lightbox
-##.nag
-##.paywall
-##.subscribe
-##.newsletter
-##.cookie-banner
-##.consent
-##.gdpr
-##.ccpa
-
-! ----------------------------------------------------------------------
-! PAYWALL & ANNOYANCE ELEMENTS
-! ----------------------------------------------------------------------
-##*:has-text(Subscribe)
-##*:has-text(Sign up)
-##*:has-text(Create account)
-##*:has-text(Continue reading)
-##*:has-text(Unlock this article)
-
-! ----------------------------------------------------------------------
-! LAZY / INFINITE FEEDS (OPTIONAL BUT NUCLEAR)
-! ----------------------------------------------------------------------
-##[class*="infinite"]
-##[class*="lazy"]
-##[class*="load-more"]
-##button:has-text(Load more)
-##button:has-text(Show more)
-
-! ----------------------------------------------------------------------
-! EMPTY AD SHELLS & LAYOUT FIXES
-! ----------------------------------------------------------------------
-##div:empty
-##section:empty
-##article:empty
-##aside
-
-*##html, body { overflow: auto !important; }
-*##* { animation: none !important; transition: none !important; }
-
-! ----------------------------------------------------------------------
-! TRACKING / TELEMETRY / ANALYTICS (DOMAIN LEVEL)
-! ----------------------------------------------------------------------
 ||doubleclick.net^
 ||googlesyndication.com^
 ||google-analytics.com^
 ||googletagmanager.com^
 ||adservice.google.com^
-||ads.*^
-||tracking.*^
-||analytics.*^
-||pixel.*^
-||telemetry.*^
-||stats.*^
+
+||amazon-adsystem.com^
+||adroll.com^
+||criteo.com^
+||quantserve.com^
+||scorecardresearch.com^
+||hotjar.com^
+
+||taboola.com^
+||outbrain.com^
+||mgid.com^
+||revcontent.com^
 
 ||facebook.com/tr^
 ||connect.facebook.net^
@@ -143,28 +61,144 @@
 ||ads.twitter.com^
 ||analytics.twitter.com^
 
-||taboola.com^
-||outbrain.com^
-||mgid.com^
-||revcontent.com^
-||adroll.com^
+||cdn.ads.*^
+||cdn.track.*^
+||cdn.analytics.*^
 
-! ----------------------------------------------------------------------
-! SOCIAL WIDGETS (ENGAGEMENT FARMING)
-! ----------------------------------------------------------------------
-||platform.twitter.com^
-||platform.instagram.com^
-||platform.facebook.com^
-||platform.tiktok.com^
+||*.gif$third-party
+||*.jpg$third-party
+||*.png$third-party
+||*.webp$third-party
+||*.mp4$third-party
+||*.webm$third-party
 
-##iframe[src*="social"]
-##iframe[src*="share"]
 
-! ----------------------------------------------------------------------
-! NUCLEAR OPTION: AUTO-PROMO ARTICLES
-! ----------------------------------------------------------------------
+! ======================================================================
+! SCRIPT EXECUTION TERMINATION (NO LOGIC RUNS)
+! ======================================================================
+
+##+js(set, navigator.sendBeacon, undefined)
+##+js(set, window.fetch, undefined)
+##+js(set, XMLHttpRequest.prototype.send, noopFunc)
+
+##+js(abort-on-property-read, ads)
+##+js(abort-on-property-read, adblock)
+##+js(abort-on-property-read, sponsored)
+##+js(abort-on-property-read, tracking)
+##+js(abort-on-property-read, analytics)
+##+js(abort-on-property-read, marketing)
+
+
+! ======================================================================
+! PRE-RENDER COSMETIC EXTERMINATION (NO FLASH)
+! ======================================================================
+
+##[class*="ad"]
+##[id*="ad"]
+##[class*="ads"]
+##[id*="ads"]
+##[class*="advert"]
+##[class*="promo"]
+##[class*="promotion"]
+##[class*="banner"]
+##[class*="sponsor"]
+##[class*="commercial"]
+##[class*="marketing"]
+
+##iframe
+##aside
+##footer
+
+##*:has-text(Sponsored)
+##*:has-text(Promoted)
+##*:has-text(Advertisement)
+##*:has-text(Recommended)
+##*:has-text(Trending)
+##*:has-text(For You)
+##*:has-text(You may like)
+##*:has-text(From around the web)
+##*:has-text(People also read)
+
+##button:has-text(Install)
+##button:has-text(Download)
+##button:has-text(Open in app)
+##button:has-text(Play)
+
+##[href*="affiliate"]
+##[href*="ref="]
+##[href*="utm_"]
+##[href*="amzn.to"]
+##[href*="bit.ly"]
+##[href*="linktr.ee"]
+
+
+! ======================================================================
+! DARK PATTERNS / POPUPS / PAYWALLS
+! ======================================================================
+
+##.modal
+##.popup
+##.overlay
+##.lightbox
+##.nag
+##.subscribe
+##.newsletter
+##.cookie
+##.consent
+##.gdpr
+##.paywall
+
+##*:has-text(Subscribe)
+##*:has-text(Sign up)
+##*:has-text(Create account)
+##*:has-text(Continue reading)
+##*:has-text(Unlock this article)
+
+
+! ======================================================================
+! FEED & ENGAGEMENT EXTERMINATION
+! ======================================================================
+
+##[class*="feed"]
+##[class*="stream"]
+##[class*="infinite"]
+##[class*="lazy"]
+##button:has-text(Load more)
+##button:has-text(Show more)
+
+
+! ======================================================================
+! EMPTY SHELL & LAYOUT CLEANUP
+! ======================================================================
+
+##div:empty
+##section:empty
+##article:empty
+##li:empty
+
+*##* {
+  animation: none !important;
+  transition: none !important;
+}
+
+*##html, body {
+  overflow: auto !important;
+}
+
+
+! ======================================================================
+! AUTO-PROMO / FAKE CONTENT REMOVAL
+! ======================================================================
+
 ##article:not(:has(time))
 ##article:has(a[href*="promo"])
 ##article:has(a[href*="campaign"])
+##article:has(a[href*="tracking"])
 ##article[data-type*="ad"]
 ##article[class*="featured"]
+##article[class*="recommended"]
+
+
+! ======================================================================
+! END OF FILE — CLEAN INTERNET ACHIEVED
+! ======================================================================
