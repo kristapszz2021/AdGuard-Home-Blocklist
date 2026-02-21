@@ -1,194 +1,114 @@
-! ======================================================================
-! UNIVERSAL INLINE / FEED / PROMO / BANNER BLOCKER
-! Version: 2026-02 Ultimate Adaptive+
-! Tool: uBlock Origin
-! ======================================================================
+// ==UserScript==
+// @name         Nuclear AI Adblocker + Network Kill
+// @namespace    http://example.com
+// @version      2026.2
+// @description  Ultra-aggressive adblocker with Ollama AI dynamic detection and network/scriptlet blocking
+// @match        *://*/*
+// @run-at       document-start
+// @grant        none
+// ==/UserScript==
 
-! ------------------------------
-! GENERIC BANNER / ADS
-! ------------------------------
-##.ad
-##.ads
-##.adsbox
-##.adbox
-##.ad-container
-##.ad-wrapper
-##.advert
-##.advertisement
-##.banner
-##.banner-ad
-##.promo
-##.promotion
-##.sponsor
-##.sponsored
-##.commercial
-##.marketing
-##[id^="ad-"]
-##[id^="ads-"]
-##[id*="advert"]
-##[id*="sponsor"]
-##[id*="promo"]
-##div[class*="ad-"]
-##div[class*="ads-"]
+(function() {
+    'use strict';
 
-! ------------------------------
-! NATIVE NETWORKS / PROMOTED CONTENT
-! ------------------------------
-##.taboola
-##.trc_rbox
-##.OUTBRAIN
-##.mgid
-##.mgbox
-##.revcontent
-##.rc-widget
-##.widget-ad
-##.native-ad
-##.recommended-widget
-##.recommended-post
-##.content-recommendation
-##section:has-text(Sponsored)
-##section:has-text(Promoted)
+    // ============================
+    // 1️⃣ Network-level / Scriptlet blocking
+    // ============================
+    const noopFunc = () => {};
+    try { navigator.sendBeacon = undefined; } catch {}
+    try { window.fetch = undefined; } catch {}
+    try { XMLHttpRequest.prototype.send = noopFunc; } catch {}
+    try { Object.defineProperty(window, 'ads', {get: noopFunc}); } catch {}
+    try { Object.defineProperty(window, 'adblock', {get: noopFunc}); } catch {}
+    try { Object.defineProperty(window, 'sponsored', {get: noopFunc}); } catch {}
+    try { Object.defineProperty(window, 'tracking', {get: noopFunc}); } catch {}
+    try { Object.defineProperty(window, 'analytics', {get: noopFunc}); } catch {}
 
-! ------------------------------
-! INLINE / BETWEEN-POST ADS
-! ------------------------------
-##article:has-text(Ad)
-##article:has-text(Ads)
-##article:has-text(Sponsored)
-##article:has-text(Promoted)
-##article:has-text(Advertisement)
-##div:has-text(Sponsored)
-##div:has-text(Promoted)
-##span:has-text(Ad Choices)
-##article:has(iframe)
-##article:has(img[src*="ads"])
-##article:has(a[href*="ads"])
-##li:has(iframe)
-##li:has(img[src*="ads"])
-##li:has(a[href*="ads"])
-##div[class*="promo"]:has-text(Play)
-##div[class*="install"]
-##button:has-text(Install)
-##button:has-text(Play)
+    // Optional: block known ad domains preemptively
+    const blockedDomains = [
+        "doubleclick.net","googlesyndication.com","adservice.google.com",
+        "pagead2.googlesyndication.com","ads.twitter.com","ads.facebook.com",
+        "partner.googleadservices.com","adroll.com","taboola.com",
+        "outbrain.com","mgid.com","revcontent.com",
+        "tracking.","analytics.","pixel.","ads.",
+        "platform.twitter.com","platform.instagram.com",
+        "platform.facebook.com","platform.tiktok.com"
+    ];
 
-! ------------------------------
-! DYNAMIC / LAZY LOADED ADS
-! ------------------------------
-##iframe[src*="ads"]
-##div:has(iframe[src*="ads"])
-##div[class*="infinite"]:has-text(Sponsored)
-##div[class*="stream"]:has-text(Ad)
-##div[class*="feed"]:has-text(Sponsored)
-##div[class*="lazy"]:has(iframe[src*="ads"])
-##div[class*="lazy"]:has(img[src*="ads"])
-##div[class*="lazyload"]:has(iframe)
-##div[class*="lazyload"]:has(img)
-##div[class*="scroll"]:has-text(Promo)
-##section[class*="sponsored"]:has(iframe)
+    const interceptRequests = () => {
+        const origOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(method, url) {
+            if (blockedDomains.some(d => url.includes(d))) {
+                console.log("Blocked XHR:", url);
+                return; // abort request
+            }
+            return origOpen.apply(this, arguments);
+        };
+    };
+    interceptRequests();
 
-! ------------------------------
-! STICKY / FLOATING / MODAL ADS
-! ------------------------------
-##.sticky
-##.sticky-ad
-##.floating
-##.floating-ad
-##.fixed-ad
-##.ad-fixed
-##.ad-sticky
-##.fixed-banner
-##.modal
-##.overlay
-##.popup
-##.lightbox
-##.notification-overlay
-##.subscribe-overlay
+    // ============================
+    // 2️⃣ Cosmetic / layout cleanup
+    // ============================
+    const style = document.createElement('style');
+    style.innerHTML = `
+        * { animation: none !important; transition: none !important; }
+        html, body { overflow: auto !important; }
+    `;
+    document.documentElement.appendChild(style);
 
-! ------------------------------
-! INTERNAL / FIRST-PARTY PROMOS
-! ------------------------------
-##article:has(a[href*="utm_"])
-##article:has(a[href*="ref="])
-##article:has(a[href*="promo"])
-##article:has(a[href*="campaign"])
-##article:has(a[href*="tracking"])
-##article[class*="promo"]
-##article[class*="highlight"]
-##article[class*="featured"]
-##article[class*="recommended"]
-##article[class*="recommended-widget"]
-##article[style*="background"]
-##article[style*="box-shadow"]
-##article[style*="border"]
-##article:has-text(Read More)
-##article:has-text(Try Now)
-##article:has-text(Recommended)
-##article:has-text(Trending)
+    // ============================
+    // 3️⃣ Static ad container removal (pre-render)
+    // ============================
+    const staticSelectors = [
+        '[class*="ad"]','[id*="ad"]','[class*="ads"]','[id*="ads"]',
+        '[class*="banner"]','[class*="promo"]','[class*="sponsor"]',
+        '[class*="commercial"]','[class*="marketing"]',
+        'iframe','aside','footer',
+        'div:empty','section:empty','article:empty'
+    ];
 
-! ------------------------------
-! EMPTY PLACEHOLDERS & LAYOUT GAPS
-! ------------------------------
-##div:empty
-##article:empty
-##li:empty
-##section:empty
-##div[style*="height: 250px"]
-##div[style*="height:250px"]
-##div[style*="height: 300px"]
-##div[style*="min-height: 250px"]
-##div[style*="min-height:250px"]
-##div[class*="placeholder"]
-*##html { overflow: auto !important; }
-*##body { overflow: auto !important; }
-*##article,
-*##li,
-*##.post,
-*##.feed-item,
-*##section { margin-top: 0 !important; margin-bottom: 0 !important; }
-*##.container,
-*##.content,
-*##.main { padding-top: 0 !important; }
-*##div { max-height: none !important; }
+    const removeStaticElements = () => {
+        staticSelectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => el.remove());
+        });
+    };
+    removeStaticElements();
+    const observerStatic = new MutationObserver(removeStaticElements);
+    observerStatic.observe(document.documentElement, { childList: true, subtree: true });
 
-! ------------------------------
-! SCRIPT / TRACKING BLOCKING
-! ------------------------------
-||doubleclick.net^
-||googlesyndication.com^
-||adservice.google.com^
-||pagead2.googlesyndication.com^
-||ads.twitter.com^
-||ads.facebook.com^
-||partner.googleadservices.com^
-||adroll.com^
-||taboola.com^
-||outbrain.com^
-||mgid.com^
-||revcontent.com^
-||tracking.*^
-||analytics.*^
-||pixel.*^
-||ads.*^
+    // ============================
+    // 4️⃣ Ollama AI dynamic detection
+    // ============================
+    const ollamaBlock = async (el) => {
+        if (!el.innerText || el.innerText.length < 20) return;
+        try {
+            const response = await fetch('http://localhost:11434/v1/ollama', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'llama2',
+                    prompt: `Is the following content an advertisement, sponsored post, or promotional material? Answer "yes" or "no":\n${el.innerText}`
+                })
+            });
+            const data = await response.json();
+            if (data.output_text.toLowerCase().includes('yes')) {
+                el.remove();
+            }
+        } catch (e) {
+            console.error('Ollama AI block error:', e);
+        }
+    };
 
-! ------------------------------
-! SOCIAL / ENGAGEMENT WIDGETS
-! ------------------------------
-||platform.twitter.com^
-||platform.instagram.com^
-||platform.facebook.com^
-||platform.tiktok.com^
-##iframe[src*="social"]
-##iframe[src*="share"]
+    const dynamicSelectors = ['article','div','section','aside'];
+    const runOllamaAI = () => {
+        dynamicSelectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => ollamaBlock(el));
+        });
+    };
 
-! ------------------------------
-! ADVANCED SITE-GENERIC PROMO FILTERS
-! ------------------------------
-##article:not(:has(time))
-##article:not(:has([href^="/user"]))
-##article:has(a[href*="/promo"])
-##article:has(a[href*="campaign"])
-##article[data-type*="ad"]
-##div[data-tracking*="ad"]
-##div[class*="recommend"]
-##div[class*="trending"]
-##div[class*="suggested"]
+    document.addEventListener('DOMContentLoaded', runOllamaAI);
+    const observerDynamic = new MutationObserver(runOllamaAI);
+    observerDynamic.observe(document.documentElement, { childList: true, subtree: true });
+
+})();
