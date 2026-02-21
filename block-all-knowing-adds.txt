@@ -1,186 +1,170 @@
 ! ======================================================================
-! UNIVERSAL INLINE / FEED / PROMO / BANNER BLOCKER
-! Version: 2026-02 Ultimate Adaptive
-! Tool: uBlock Origin
+! TOTAL CONTENT EXTERMINATION LIST
+! Ads • Promos • Sponsored • Tracking • Bait • Dark Patterns
+! Version: 2026-02 EXTREME PURITY MODE
+! Tool: uBlock Origin (Advanced User)
 ! ======================================================================
 
-! ------------------------------
-! GENERIC BANNER / ADS
-! ------------------------------
-##.ad
-##.ads
-##.adsbox
-##.adbox
-##.ad-container
-##.ad-wrapper
-##.advert
-##.advertisement
-##.banner
-##.banner-ad
-##.promo
-##.promotion
-##.sponsor
-##.sponsored
-##.commercial
-##[id^="ad-"]
-##[id^="ads-"]
-##[id*="advert"]
-##[id*="sponsor"]
+! ----------------------------------------------------------------------
+! EVERYTHING THAT EVEN LOOKS LIKE AN AD
+! ----------------------------------------------------------------------
+##[class*="ad"]
+##[class*="ads"]
+##[class*="advert"]
+##[class*="promo"]
+##[class*="sponsor"]
+##[class*="commercial"]
+##[class*="marketing"]
+##[id*="ad"]
+##[id*="ads"]
 ##[id*="promo"]
-##div[class*="ad-"]
-##div[class*="ads-"]
+##[id*="sponsor"]
+##[aria-label*="advert"]
+##[aria-label*="sponsor"]
 
-! ------------------------------
-! NATIVE NETWORKS / PROMOTED CONTENT
-! ------------------------------
-##.taboola
-##.trc_rbox
-##.OUTBRAIN
-##.mgid
-##.mgbox
-##.revcontent
-##.rc-widget
-##.widget-ad
-##.native-ad
-##.recommended-widget
-##.recommended-post
-##.content-recommendation
-##section:has-text(Sponsored)
-##section:has-text(Promoted)
+! ----------------------------------------------------------------------
+! SPONSORED / PROMOTED / NATIVE BS (TEXT-BASED DETECTION)
+! ----------------------------------------------------------------------
+##*:has-text(Sponsored)
+##*:has-text(Promoted)
+##*:has-text(Partnered)
+##*:has-text(Paid Post)
+##*:has-text(Advertisement)
+##*:has-text(Ad Choices)
+##*:has-text(Brand Partner)
+##*:has-text(Affiliate)
+##*:has-text(Contains paid promotion)
 
-! ------------------------------
-! INLINE / BETWEEN-POST ADS
-! ------------------------------
-##article:has-text(Ad)
-##article:has-text(Ads)
-##article:has-text(Sponsored)
-##article:has-text(Promoted)
-##article:has-text(Advertisement)
-##div:has-text(Sponsored)
-##div:has-text(Promoted)
-##span:has-text(Ad Choices)
-##article:has(iframe)
-##article:has(img[src*="ads"])
-##article:has(a[href*="ads"])
-##li:has(iframe)
-##li:has(img[src*="ads"])
-##li:has(a[href*="ads"])
-##div[class*="promo"]:has-text(Play)
-##div[class*="install"]
-##button:has-text(Install)
+! ----------------------------------------------------------------------
+! INFLUENCER / SOCIAL PROMO ELEMENTS
+! ----------------------------------------------------------------------
+##[class*="influencer"]
+##[class*="creator-card"]
+##[class*="brand-deal"]
+##[href*="linktr.ee"]
+##[href*="bit.ly"]
+##[href*="amzn.to"]
+##[href*="affiliate"]
+##[href*="ref="]
+##[href*="utm_"]
+
+! ----------------------------------------------------------------------
+! RECOMMENDED / TRENDING / FEED MANIPULATION
+! ----------------------------------------------------------------------
+##*:has-text(Recommended)
+##*:has-text(Trending)
+##*:has-text(For You)
+##*:has-text(You may like)
+##*:has-text(From around the web)
+##*:has-text(Related posts)
+##*:has-text(People also read)
+##*:has-text(Suggested)
+##[class*="recommend"]
+##[class*="trending"]
+##[class*="suggested"]
+##[class*="for-you"]
+
+! ----------------------------------------------------------------------
+! VIDEO / APP PUSHING
+! ----------------------------------------------------------------------
+##*:has-text(Install)
+##*:has-text(Get the app)
+##*:has-text(Download app)
+##*:has-text(Open in app)
 ##button:has-text(Play)
+##button:has-text(Install)
+##button:has-text(Download)
 
-! ------------------------------
-! DYNAMIC / LAZY LOADED ADS
-! ------------------------------
-##iframe[src*="ads"]
-##div:has(iframe[src*="ads"])
-##div[class*="infinite"]:has-text(Sponsored)
-##div[class*="stream"]:has-text(Ad)
-##div[class*="feed"]:has-text(Sponsored)
-##div[class*="lazy"]:has(iframe[src*="ads"])
-##div[class*="lazy"]:has(img[src*="ads"])
-##div[class*="lazyload"]:has(iframe)
-##div[class*="lazyload"]:has(img)
-##div[class*="scroll"]:has-text(Promo)
-##section[class*="sponsored"]:has(iframe)
-
-! ------------------------------
-! STICKY / FLOATING / MODAL ADS
-! ------------------------------
-##.sticky
-##.sticky-ad
-##.floating
-##.floating-ad
-##.fixed-ad
-##.ad-fixed
-##.ad-sticky
-##.fixed-banner
+! ----------------------------------------------------------------------
+! POPUPS / MODALS / DARK PATTERNS
+! ----------------------------------------------------------------------
 ##.modal
-##.overlay
 ##.popup
+##.overlay
+##.backdrop
 ##.lightbox
-##.notification-overlay
-##.subscribe-overlay
+##.nag
+##.paywall
+##.subscribe
+##.newsletter
+##.cookie-banner
+##.consent
+##.gdpr
+##.ccpa
 
-! ------------------------------
-! INTERNAL / FIRST-PARTY PROMOS
-! ------------------------------
-##article:has(a[href*="utm_"])
-##article:has(a[href*="ref="])
-##article:has(a[href*="promo"])
-##article:has(a[href*="campaign"])
-##article:has(a[href*="tracking"])
-##article[class*="promo"]
-##article[class*="highlight"]
-##article[class*="featured"]
-##article[class*="recommended"]
-##article[class*="recommended-widget"]
-##article[style*="background"]
-##article[style*="box-shadow"]
-##article[style*="border"]
-##article:has-text(Read More)
-##article:has-text(Try Now)
-##article:has-text(Recommended)
-##article:has-text(Trending)
+! ----------------------------------------------------------------------
+! PAYWALL & ANNOYANCE ELEMENTS
+! ----------------------------------------------------------------------
+##*:has-text(Subscribe)
+##*:has-text(Sign up)
+##*:has-text(Create account)
+##*:has-text(Continue reading)
+##*:has-text(Unlock this article)
 
-! ------------------------------
-! EMPTY PLACEHOLDERS & LAYOUT GAPS
-! ------------------------------
+! ----------------------------------------------------------------------
+! LAZY / INFINITE FEEDS (OPTIONAL BUT NUCLEAR)
+! ----------------------------------------------------------------------
+##[class*="infinite"]
+##[class*="lazy"]
+##[class*="load-more"]
+##button:has-text(Load more)
+##button:has-text(Show more)
+
+! ----------------------------------------------------------------------
+! EMPTY AD SHELLS & LAYOUT FIXES
+! ----------------------------------------------------------------------
 ##div:empty
-##article:empty
-##li:empty
 ##section:empty
-##div[style*="height: 250px"]
-##div[style*="height:250px"]
-##div[style*="height: 300px"]
-##div[style*="min-height: 250px"]
-##div[style*="min-height:250px"]
-##div[class*="placeholder"]
-*##html { overflow: auto !important; }
-*##body { overflow: auto !important; }
-*##article,
-*##li,
-*##.post,
-*##.feed-item,
-*##section {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-*##.container,
-*##.content,
-*##.main {
-  padding-top: 0 !important;
-}
-*##div { max-height: none !important; }
+##article:empty
+##aside
 
-! ------------------------------
-! SCRIPT / TRACKING BLOCKING
-! ------------------------------
+*##html, body { overflow: auto !important; }
+*##* { animation: none !important; transition: none !important; }
+
+! ----------------------------------------------------------------------
+! TRACKING / TELEMETRY / ANALYTICS (DOMAIN LEVEL)
+! ----------------------------------------------------------------------
 ||doubleclick.net^
 ||googlesyndication.com^
+||google-analytics.com^
+||googletagmanager.com^
 ||adservice.google.com^
-||pagead2.googlesyndication.com^
-||ads.twitter.com^
+||ads.*^
+||tracking.*^
+||analytics.*^
+||pixel.*^
+||telemetry.*^
+||stats.*^
+
+||facebook.com/tr^
+||connect.facebook.net^
 ||ads.facebook.com^
-||partner.googleadservices.com^
-||adroll.com^
+
+||ads.twitter.com^
+||analytics.twitter.com^
+
 ||taboola.com^
 ||outbrain.com^
 ||mgid.com^
 ||revcontent.com^
-||adservice.google.com^
-||tracking.*^
-||analytics.*^
-||pixel.*^
-||ads.*^
+||adroll.com^
 
-! ------------------------------
-! ADVANCED SITE-GENERIC PROMO FILTERS
-! ------------------------------
+! ----------------------------------------------------------------------
+! SOCIAL WIDGETS (ENGAGEMENT FARMING)
+! ----------------------------------------------------------------------
+||platform.twitter.com^
+||platform.instagram.com^
+||platform.facebook.com^
+||platform.tiktok.com^
+
+##iframe[src*="social"]
+##iframe[src*="share"]
+
+! ----------------------------------------------------------------------
+! NUCLEAR OPTION: AUTO-PROMO ARTICLES
+! ----------------------------------------------------------------------
 ##article:not(:has(time))
-##article:not(:has([href^="/user"]))
-##article:has(a[href*="/promo"])
+##article:has(a[href*="promo"])
 ##article:has(a[href*="campaign"])
 ##article[data-type*="ad"]
-##div[data-tracking*="ad"]
+##article[class*="featured"]
