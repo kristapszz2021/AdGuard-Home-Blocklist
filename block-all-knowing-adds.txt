@@ -1,114 +1,80 @@
-// ==UserScript==
-// @name         Nuclear AI Adblocker + Network Kill
-// @namespace    http://example.com
-// @version      2026.2
-// @description  Ultra-aggressive adblocker with Ollama AI dynamic detection and network/scriptlet blocking
-// @match        *://*/*
-// @run-at       document-start
-// @grant        none
-// ==/UserScript==
+! ======================
+! Hosts‑style domain blocks
+! ======================
+127.0.0.1 adservice.google.com
+127.0.0.1 ads.google.com
+127.0.0.1 pagead2.googlesyndication.com
+127.0.0.1 partner.googleadservices.com
+127.0.0.1 doubleclick.net
+127.0.0.1 google-analytics.com
+127.0.0.1 ssl.google-analytics.com
+127.0.0.1 analytics.twitter.com
+127.0.0.1 ads.twitter.com
+127.0.0.1 ads.facebook.com
+127.0.0.1 connect.facebook.net
+127.0.0.1 pixel.facebook.com
+127.0.0.1 rubiconproject.com
+127.0.0.1 openx.net
+127.0.0.1 adroll.com
+127.0.0.1 quantserve.com
+127.0.0.1 scorecardresearch.com
+127.0.0.1 atdmt.com
+127.0.0.1 zetadns.net
+127.0.0.1 adform.net
+127.0.0.1 popads.net
+127.0.0.1 autoplayvideos.example.com
 
-(function() {
-    'use strict';
+! ======================
+! AdBlock URL + resource filters
+! ======================
+||googlesyndication.com^
+||googleadservices.com^
+||doubleclick.net^
+||google-analytics.com^
+||analytics.twitter.com^
+||facebook.com/tr^
+||pixel.facebook.com^
+||connect.facebook.net^
+||ads.yahoo.com^
+||rubiconproject.com^
+||openx.net^
+||adroll.com^
+||quantserve.com^
+||scorecardresearch.com^
+||atdmt.com^
+||zetadns.net^
+||adform.net^
+||popads.net^
+||popunder.example.com^$popup
+||autoplayvideos.example.com^$script
+||outbrain.com^
+||taboola.com^
 
-    // ============================
-    // 1️⃣ Network-level / Scriptlet blocking
-    // ============================
-    const noopFunc = () => {};
-    try { navigator.sendBeacon = undefined; } catch {}
-    try { window.fetch = undefined; } catch {}
-    try { XMLHttpRequest.prototype.send = noopFunc; } catch {}
-    try { Object.defineProperty(window, 'ads', {get: noopFunc}); } catch {}
-    try { Object.defineProperty(window, 'adblock', {get: noopFunc}); } catch {}
-    try { Object.defineProperty(window, 'sponsored', {get: noopFunc}); } catch {}
-    try { Object.defineProperty(window, 'tracking', {get: noopFunc}); } catch {}
-    try { Object.defineProperty(window, 'analytics', {get: noopFunc}); } catch {}
+! ======================
+! Local & Popular Latvian Portals (block trackers/ads)
+! ======================
+||delfi.lv^
+||tvnet.lv^
+||inbox.lv^
+||lsm.lv^
+||jauns.lv^
+||apollo.lv^
+||ss.lv^
+||1188.lv^
+||lvportals.lv^
+||spoki.lv^
+||sportacentrs.com^
+||draugiem.lv^
 
-    // Optional: block known ad domains preemptively
-    const blockedDomains = [
-        "doubleclick.net","googlesyndication.com","adservice.google.com",
-        "pagead2.googlesyndication.com","ads.twitter.com","ads.facebook.com",
-        "partner.googleadservices.com","adroll.com","taboola.com",
-        "outbrain.com","mgid.com","revcontent.com",
-        "tracking.","analytics.","pixel.","ads.",
-        "platform.twitter.com","platform.instagram.com",
-        "platform.facebook.com","platform.tiktok.com"
-    ];
+! ======================
+! Tracking pixels / social media used in Latvia
+! ======================
+||instagram.com^
+||tiktok.com^
+||linkedin.com/px^
 
-    const interceptRequests = () => {
-        const origOpen = XMLHttpRequest.prototype.open;
-        XMLHttpRequest.prototype.open = function(method, url) {
-            if (blockedDomains.some(d => url.includes(d))) {
-                console.log("Blocked XHR:", url);
-                return; // abort request
-            }
-            return origOpen.apply(this, arguments);
-        };
-    };
-    interceptRequests();
-
-    // ============================
-    // 2️⃣ Cosmetic / layout cleanup
-    // ============================
-    const style = document.createElement('style');
-    style.innerHTML = `
-        * { animation: none !important; transition: none !important; }
-        html, body { overflow: auto !important; }
-    `;
-    document.documentElement.appendChild(style);
-
-    // ============================
-    // 3️⃣ Static ad container removal (pre-render)
-    // ============================
-    const staticSelectors = [
-        '[class*="ad"]','[id*="ad"]','[class*="ads"]','[id*="ads"]',
-        '[class*="banner"]','[class*="promo"]','[class*="sponsor"]',
-        '[class*="commercial"]','[class*="marketing"]',
-        'iframe','aside','footer',
-        'div:empty','section:empty','article:empty'
-    ];
-
-    const removeStaticElements = () => {
-        staticSelectors.forEach(sel => {
-            document.querySelectorAll(sel).forEach(el => el.remove());
-        });
-    };
-    removeStaticElements();
-    const observerStatic = new MutationObserver(removeStaticElements);
-    observerStatic.observe(document.documentElement, { childList: true, subtree: true });
-
-    // ============================
-    // 4️⃣ Ollama AI dynamic detection
-    // ============================
-    const ollamaBlock = async (el) => {
-        if (!el.innerText || el.innerText.length < 20) return;
-        try {
-            const response = await fetch('http://localhost:11434/v1/ollama', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: 'llama2',
-                    prompt: `Is the following content an advertisement, sponsored post, or promotional material? Answer "yes" or "no":\n${el.innerText}`
-                })
-            });
-            const data = await response.json();
-            if (data.output_text.toLowerCase().includes('yes')) {
-                el.remove();
-            }
-        } catch (e) {
-            console.error('Ollama AI block error:', e);
-        }
-    };
-
-    const dynamicSelectors = ['article','div','section','aside'];
-    const runOllamaAI = () => {
-        dynamicSelectors.forEach(sel => {
-            document.querySelectorAll(sel).forEach(el => ollamaBlock(el));
-        });
-    };
-
-    document.addEventListener('DOMContentLoaded', runOllamaAI);
-    const observerDynamic = new MutationObserver(runOllamaAI);
-    observerDynamic.observe(document.documentElement, { childList: true, subtree: true });
-
-})();
+! ======================
+! Optional Whitelists (enable safe browsing for specific sites 👍)
+! ======================
+@@||lsm.lv^$document
+@@||ss.lv^$document
