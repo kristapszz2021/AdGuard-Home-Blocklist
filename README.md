@@ -1,18 +1,18 @@
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/AdAway%20Default%20Blocklist.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/AdGuard_DNS_filter.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Android%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/DNS%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Domains%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Double%20Click%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Fiber%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Firebase%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Fonts%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/General%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Mail%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Products%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Proxies%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Short%20Links%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Tics%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Youtube%20Parsed.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/arrange%20site%20to%20original%20state.txt
-https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/block-all-knowing-adds.txt
+1. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/AdAway%20Default%20Blocklist.txt
+2. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/AdGuard_DNS_filter.txt
+3. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Android%20Parsed.txt
+4. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/DNS%20Parsed.txt
+5. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Domains%20Parsed.txt
+6. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Double%20Click%20Parsed.txt
+7. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Fiber%20Parsed.txt
+8. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Firebase%20Parsed.txt
+9. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Fonts%20Parsed.txt
+10. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/General%20Parsed.txt
+11. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Mail%20Parsed.txt
+12. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Products%20Parsed.txt
+13. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Proxies%20Parsed.txt 
+14. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Short%20Links%20Parsed.txt
+15. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Tics%20Parsed.txt
+16. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/Youtube%20Parsed.txt
+17. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/arrange%20site%20to%20original%20state.txt
+18. https://raw.githubusercontent.com/kristapszz2021/AdGuard-Home-Blocklist/refs/heads/main/block-all-knowing-adds.txt
